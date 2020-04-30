@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/my_bg"
+    android:layout_height="match_parent"
+    tools:context=".Controlers.Activities.SignIn">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtPhone"
+            android:hint="Numero de telephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0484361167"
+            android:textSize="34sp"
+            android:inputType="phone">
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:hint="MotDePasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textSize="34sp"
+            android:inputType="textPassword">
+        </EditText>
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btSignIn"
+        android:text="Sign In"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+    </Button>
+
+
+
+
+
+
+</RelativeLayout>
