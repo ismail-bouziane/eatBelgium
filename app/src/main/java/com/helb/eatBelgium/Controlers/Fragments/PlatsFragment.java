@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,14 +36,14 @@ public class PlatsFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        /*if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.list_categories, new PlatsFragment()).commit();
+        }*/
     }
-
-
-
 
     public static PlatsFragment newInstance() {
         return (new PlatsFragment());
@@ -51,9 +52,13 @@ public class PlatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plats, container, false);
 
+        // Inflate the layout for this fragment
+        RelativeLayout ll = (RelativeLayout) inflater.inflate(R.layout.fragment_plats, container, false);
+        RecyclerView rec = (RecyclerView) ll.findViewById(R.id.list_categories);
+        //LinearLayout  root = (LinearLayout) ll.findViewById(R.id.list_root);
+        //TextView txtTitle= (TextView) ll.findViewById(R.id.list_title);
+        return  ll;
     }
 
 
@@ -62,7 +67,7 @@ public class PlatsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //initialize your view here for use view.findViewById("your view id")
-        recyclerView = view.findViewById(R.id.list_categories);
+        recyclerView = (RecyclerView) view.findViewById(R.id.list_categories);
 
         linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -125,12 +130,12 @@ public class PlatsFragment extends Fragment {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout root;
+        public RecyclerView root;
         public TextView txtTitle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            root = itemView.findViewById(R.id.list_root);
-            txtTitle= itemView.findViewById(R.id.list_title);
+            root = (RecyclerView)getView().findViewById(R.id.list_categories);
+            txtTitle= (TextView)getView().findViewById(R.id.list_title);
         }
         //    public TextView txtTitle;
         //  public TextView txtDesc;
