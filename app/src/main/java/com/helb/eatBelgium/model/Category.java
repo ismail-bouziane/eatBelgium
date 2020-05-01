@@ -30,4 +30,12 @@ public class Category {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", nomCategory='" + nomCategory + '\'' +
+                '}';
+    }
 }

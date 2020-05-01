@@ -1,6 +1,7 @@
 package com.helb.eatBelgium.Controlers.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,10 +102,13 @@ public class PlatsFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i, @NonNull Category category) {
                 viewHolder.setTxtTitle(category.getNomCategory());
+                Log.d("DEBUG---------------------------------",category.getNomCategory());
                 viewHolder.root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(view.getContext(), String.valueOf(i), Toast.LENGTH_SHORT).show(); // ici
+                    //    System.out.println(category);
+                        Log.d("DEBUG---------------------------------",category.getNomCategory());
                     }
                 });
             }
