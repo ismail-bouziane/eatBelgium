@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Controlers.Fragments.PlatsFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
@@ -7,26 +9,27 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginStart="16dp"
+
     android:layout_marginTop="8dp">
 
     <LinearLayout
         android:id="@+id/list_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
         android:padding="16dp">
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" /> -->
 
 
 
