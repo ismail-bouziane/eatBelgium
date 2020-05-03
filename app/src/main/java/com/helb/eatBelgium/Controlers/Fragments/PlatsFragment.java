@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,9 +59,30 @@ public class PlatsFragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_plats, container, false);
         RelativeLayout ll = (RelativeLayout) inflater.inflate(R.layout.fragment_plats, container, false);
-        RecyclerView rec = (RecyclerView) ll.findViewById(R.id.list_categories);
-        //LinearLayout  root = (LinearLayout) ll.findViewById(R.id.list_root);
-        //TextView txtTitle= (TextView) ll.findViewById(R.id.list_title);
+        RecyclerView recyclerView = (RecyclerView) ll.findViewById(R.id.list_categories);
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int itemID = recyclerView.getId();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("recID",itemID);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                ProductsFragments productsFragments = new ProductsFragments();
+                productsFragments.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.recycler_products,productsFragments);
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
         return  ll;
 
     }
@@ -104,6 +127,29 @@ public class PlatsFragment extends Fragment {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.fragment_plats, parent, false);
 
+                final ViewHolder viewHolder = new ViewHolder(view);
+
+                viewHolder.txtTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "TEST CLICK", Toast.LENGTH_SHORT).show(); // ici
+                        //    System.out.println(category);
+
+                        int itemID = view.getId();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("recID",itemID);
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        ProductsFragments productsFragments = new ProductsFragments();
+                        productsFragments.setArguments(bundle);
+
+                        fragmentTransaction.replace(R.id.list_product_plats,productsFragments);
+                        fragmentTransaction.commit();
+                    }
+                });
                 return new ViewHolder(view);
             }
 
@@ -117,8 +163,23 @@ public class PlatsFragment extends Fragment {
                         Toast.makeText(view.getContext(), String.valueOf(i), Toast.LENGTH_SHORT).show(); // ici
                     //    System.out.println(category);
                         Log.d("DEBUG---------------------------------",category.getNomCategory());
+
+                        int itemID = view.getId();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("recID",itemID);
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        ProductsFragments productsFragments = new ProductsFragments();
+                        productsFragments.setArguments(bundle);
+
+                        fragmentTransaction.replace(R.id.list_product_plats,productsFragments);
+                        fragmentTransaction.commit();
                     }
                 });
+
             }
         };
         recyclerView.setAdapter(adapter);
@@ -151,6 +212,7 @@ public class PlatsFragment extends Fragment {
               txtTitle.setText(string);
             }
     }
+
 
 }
 

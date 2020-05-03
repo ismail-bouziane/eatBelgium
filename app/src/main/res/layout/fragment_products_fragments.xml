@@ -23,4 +23,10 @@
        android:layout_height="match_parent">
 
    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_product_plats"
+        android:layout_width="403dp"
+        android:layout_height="341dp" />
+
 </androidx.cardview.widget.CardView>
