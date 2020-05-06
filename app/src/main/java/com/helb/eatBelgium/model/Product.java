@@ -1,6 +1,7 @@
 package com.helb.eatBelgium.model;
 
 public class Product {
+    private String idProduct;
     private String nameProduct;
     private String idCategory;
     private int price;
@@ -8,7 +9,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String nameProduct, String idCategory, int price) {
+    public Product(String idProduct, String nameProduct, String idCategory, int price) {
+        this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.idCategory = idCategory;
         this.price = price;
@@ -36,5 +38,13 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(String idProduct) {
+        this.idProduct = idProduct;
     }
 }

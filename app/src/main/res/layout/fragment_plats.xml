@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/fragment_plat_layout"
     android:padding="8dp"
     tools:context=".Controlers.Fragments.PlatsFragment">
 
@@ -15,6 +16,7 @@
             android:id="@+id/list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="40dp"
             android:padding="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView

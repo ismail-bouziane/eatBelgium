@@ -38,8 +38,8 @@ public class PlatsFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
-
-
+    private static String  itemID;
+    TextView txtProduct;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -64,21 +64,6 @@ public class PlatsFragment extends Fragment {
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                int itemID = recyclerView.getId();
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("recID",itemID);
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                ProductsFragments productsFragments = new ProductsFragments();
-                productsFragments.setArguments(bundle);
-
-                fragmentTransaction.replace(R.id.recycler_products,productsFragments);
-                fragmentTransaction.commit();
-
 
             }
         });
@@ -115,6 +100,7 @@ public class PlatsFragment extends Fragment {
 
                             public Category parseSnapshot(@NonNull DataSnapshot snapshot) {
                                 System.out.println(snapshot.getChildren());
+                                itemID = snapshot.getKey().toString();
                                 return new Category(snapshot.getKey(),
                                         snapshot.child("nomCat").getValue().toString());
                             }
@@ -135,10 +121,10 @@ public class PlatsFragment extends Fragment {
                         Toast.makeText(view.getContext(), "TEST CLICK", Toast.LENGTH_SHORT).show(); // ici
                         //    System.out.println(category);
 
-                        int itemID = view.getId();
 
+                        txtProduct = view.findViewById(R.id.list_Products);
                         Bundle bundle = new Bundle();
-                        bundle.putInt("recID",itemID);
+                        bundle.putString("recID",itemID);
 
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -146,8 +132,9 @@ public class PlatsFragment extends Fragment {
                         ProductsFragments productsFragments = new ProductsFragments();
                         productsFragments.setArguments(bundle);
 
-                        fragmentTransaction.replace(R.id.list_product_plats,productsFragments);
+                        fragmentTransaction.replace(R.id.fragment_plat_layout,productsFragments);
                         fragmentTransaction.commit();
+                        itemID = "";
                     }
                 });
                 return new ViewHolder(view);
@@ -164,19 +151,6 @@ public class PlatsFragment extends Fragment {
                     //    System.out.println(category);
                         Log.d("DEBUG---------------------------------",category.getNomCategory());
 
-                        int itemID = view.getId();
-
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("recID",itemID);
-
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                        ProductsFragments productsFragments = new ProductsFragments();
-                        productsFragments.setArguments(bundle);
-
-                        fragmentTransaction.replace(R.id.list_product_plats,productsFragments);
-                        fragmentTransaction.commit();
                     }
                 });
 

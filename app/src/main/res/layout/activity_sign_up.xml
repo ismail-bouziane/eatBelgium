@@ -20,16 +20,16 @@
             android:hint="Nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ismail"
+
             android:textSize="34sp"
-            android:inputType="phone">
+            android:inputType="text">
         </EditText>
         <EditText
             android:id="@+id/edtPhone"
             android:hint="Numero de telephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0484361167"
+
             android:textSize="34sp"
             android:inputType="phone">
         </EditText>
@@ -39,7 +39,7 @@
             android:hint="MotDePasse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Admin"
+
             android:textSize="34sp"
             android:inputType="textPassword">
         </EditText>

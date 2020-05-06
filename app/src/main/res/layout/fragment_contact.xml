@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,27 +7,32 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:id="@+id/fragment_news_rootview"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.helb.eatBelgium.Controlers.Fragments.ContactFragment"
-        android:gravity="center"
-        android:background="#EDD9CF">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/fragment_page_news_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dip"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:text="Veuillez nous contacter via ce numero ou par email : "
-            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/edtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="317dp"
+            android:hint="Entrez votre message"
+            android:inputType="textMultiLine"
+            android:textSize="34sp"></EditText>
 
     </LinearLayout>
+    <Button
+        android:id="@+id/btnSendMessage"
+        android:text="Envoyer"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentBottom="true"
 
-</FrameLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+    </Button>
+</RelativeLayout>
