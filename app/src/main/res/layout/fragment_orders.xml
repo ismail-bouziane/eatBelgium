@@ -1,31 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_plat_layout"
+    android:padding="8dp"
     tools:context=".Controlers.Fragments.OrdersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:id="@+id/fragment_news_rootview"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
+        android:id="@+id/list_title_commandes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.helb.eatBelgium.Controlers.Fragments.OrdersFragment"
-        android:gravity="center"
-        android:background="#EDD9CF">
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:padding="8dp" />
 
-        <TextView
-            android:id="@+id/fragment_page_news_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dip"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:text="Voici la liste de vos commandes : "
-            android:gravity="center_horizontal" />
-    </LinearLayout>
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_orders"
+        android:layout_width="403dp"
+        android:layout_height="341dp" />
+
+</RelativeLayout>

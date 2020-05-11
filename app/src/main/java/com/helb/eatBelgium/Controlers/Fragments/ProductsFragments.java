@@ -20,9 +20,13 @@ import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.R;
 import com.helb.eatBelgium.model.Category;
 import com.helb.eatBelgium.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +41,7 @@ public class ProductsFragments extends Fragment {
     String productID;
     public TextView txtProduct;
     private static String recCatIDId;
+    private static String nomPlat;
 
 
     public ProductsFragments() {
@@ -98,11 +103,12 @@ public class ProductsFragments extends Fragment {
                             public Product parseSnapshot(@NonNull DataSnapshot snapshot) {
                                 String catiD;
                                 catiD = snapshot.child("idCat").getValue().toString();
+                                nomPlat = snapshot.child("nomProduit").getValue().toString();
 
                                     return new Product(snapshot.getKey(),
                                             snapshot.child("nomProduit").getValue().toString(),
                                             snapshot.child("idCat").getValue().toString(),
-                                            snapshot.child("price").getValue().hashCode());
+                                            Integer.parseInt(snapshot.child("price").getValue().toString()) );
 
 
                             }
@@ -117,25 +123,27 @@ public class ProductsFragments extends Fragment {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.fragment_products_fragments, parent, false);
 
-                /*final ViewHolder viewHolder = new ViewHolder(view);
+                final ViewHolder viewHolder = new ViewHolder(view);
                 viewHolder.txtnomPlat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                     }
-                });*/
+                });
                 return new ViewHolder(view);
             }
 
 
             protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Product product) {
-                viewHolder.setTxtnomPlat(product.getNameProduct());
+                viewHolder.setTxtnomPlat(product.getNameProduct(),product.getPrice());
+
                 // Log.d("DEBUG---------------------------------",category.getNomCategory());
                 viewHolder.txtnomPlat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(view.getContext(), String.valueOf(i), Toast.LENGTH_SHORT).show(); // ici
 
+                        Toast.makeText(view.getContext(), "Ajoutée au panier", Toast.LENGTH_SHORT).show();
+                        Common.listCommandes.add(nomPlat);
                     }
                 });
             }
@@ -160,14 +168,15 @@ public class ProductsFragments extends Fragment {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public RecyclerView rootPlats;
         public TextView txtnomPlat;
+        public TextView pricePlat;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rootPlats=(RecyclerView)itemView.findViewById(R.id.recycler_products);
             txtnomPlat=(TextView)itemView.findViewById(R.id.list_Products);
         }
-        public void setTxtnomPlat(String string) {
-            txtnomPlat.setText(string);
+        public void setTxtnomPlat(String string, int price) {
+            txtnomPlat.setText(string +" "+price+"€");
         }
     }
 

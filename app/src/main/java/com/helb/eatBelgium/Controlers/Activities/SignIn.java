@@ -1,5 +1,7 @@
 package com.helb.eatBelgium.Controlers.Activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.R;
 import com.helb.eatBelgium.model.User;
+
+import java.util.Calendar;
 
 //import com.google.firebase.iid.FirebaseInstanceIdService;
 public class SignIn extends AppCompatActivity {
@@ -74,7 +78,18 @@ public class SignIn extends AppCompatActivity {
 
                     }
                 });
+                                            //////////////// notification /////////////////////////////
 
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR_OF_DAY,0);
+                calendar.set(Calendar.MINUTE, 40);
+                calendar.set(Calendar.SECOND, 0);
+
+                Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
 
             }
         });

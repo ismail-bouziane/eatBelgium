@@ -39,10 +39,10 @@ public class PlatsFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
     private static String  itemID;
+
     TextView txtProduct;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -134,7 +134,7 @@ public class PlatsFragment extends Fragment {
 
                         fragmentTransaction.replace(R.id.fragment_plat_layout,productsFragments);
                         fragmentTransaction.commit();
-                        itemID = "";
+                       // itemID = "";
                     }
                 });
                 return new ViewHolder(view);

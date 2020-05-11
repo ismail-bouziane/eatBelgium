@@ -1,30 +1,50 @@
 package com.helb.eatBelgium.Controlers.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.R;
+import com.helb.eatBelgium.model.Panier;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PanierFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PanierFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  /*  private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.security.Key;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
- */
+public class PanierFragment extends Fragment  {
+
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    DatabaseReference databaseReference;
+    Button btnCommander;
+    private static long maxId=0;
+
+
+
     public static PanierFragment newInstance() {
         return (new PanierFragment());
     }
@@ -35,35 +55,66 @@ public class PanierFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_panier, container, false);
     }
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        listView=(ListView)view.findViewById(R.id.list_panier);
+        adapter= new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1,Common.listCommandes); //simple_list_item_1 R.
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PanierFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-  /*  public static PanierFragment newInstance(String param1, String param2) {
-        PanierFragment fragment = new PanierFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        btnCommander=(Button)view.findViewById(R.id.btnCommander);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_panier = database.getReference().child("Commandes");
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(view.getContext(),"Vous avez cliqué a l'item : "+ adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                final int wich_item = position;
+                new AlertDialog.Builder(view.getContext())
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Etes vous sure ?")
+                        .setMessage("Voulez vous vraiment retirer ce produit de votre panier")
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Common.listCommandes.remove(wich_item);
+                                //  positionchecker.clear();
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("Non",null)
+                        .show();
+
+
+            }
+        });
+
+        
+        listView.setAdapter(adapter);
+
+        btnCommander.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                Date date = new Date();
+                        Panier panier = new Panier(Common.listCommandes,Common.currentUser.getName(),format.format(date));
+
+                        table_panier.push().setValue(panier);
+                        Common.listCommandes.clear();
+                    }
+        });
+
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
-*/
 
 
 }

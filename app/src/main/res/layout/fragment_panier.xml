@@ -5,11 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".Controlers.Fragments.PanierFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/fragment_panier_recycler_view"
+   <ListView
+       android:id="@+id/list_panier"
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="615dp"/>
 
-   </androidx.recyclerview.widget.RecyclerView>
+   <Button
+       android:id="@+id/btnCommander"
+       android:layout_marginRight="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_alignParentBottom="true"
+
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="8dp"
+       android:text="Commander" />
 
 </RelativeLayout>
