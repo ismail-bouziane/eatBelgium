@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Controlers.Activities.Notification_receiver" />
+        <!-- <receiver android:name=".Controlers.Activities.Notification_receiver" /> -->
+        <receiver android:name=".Notification.NotificationPublisher" />
     </application>
 
 </manifest>
