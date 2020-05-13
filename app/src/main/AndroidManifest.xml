@@ -3,7 +3,9 @@
     package="com.helb.eatBelgium">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SET_ALARMSET_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,8 +24,24 @@
             </intent-filter>
         </activity>
 
-        <!-- <receiver android:name=".Controlers.Activities.Notification_receiver" /> -->
-        <receiver android:name=".Notification.NotificationPublisher" />
+        <!-- <receiver android:name=".Controlers.Activities.Notification_receiver" />
+        <receiver android:name=".Notification.NotificationPublisher" />-->
+
+        <receiver android:name=".Notification.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".Notification.AlarmNotificationReceiver"/>
+
+        <service
+            android:name=".Notification.SchedulerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
