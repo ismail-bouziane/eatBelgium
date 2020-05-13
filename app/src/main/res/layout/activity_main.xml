@@ -36,7 +36,7 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btSignUp"
-            android:text="Sign Up"
+            android:text="Inscription"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/btSignIn"
-            android:text="Sign In"
+            android:text="Connexion"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

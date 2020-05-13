@@ -59,7 +59,7 @@ public class SignIn extends AppCompatActivity {
                             if(user!=null){
 
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
-                                Toast.makeText(SignIn.this, "Connexion reussite !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "Connexion reussite ! Bienvenue " , Toast.LENGTH_SHORT).show();
                                 Intent toHome = new Intent(SignIn.this, HomeActivity.class);
                                 Common.currentUser = user;
                                 startActivity(toHome);
@@ -83,7 +83,7 @@ public class SignIn extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
 
                 calendar.set(Calendar.HOUR_OF_DAY,0);
-                calendar.set(Calendar.MINUTE, 40);
+                calendar.set(Calendar.MINUTE, 47);
                 calendar.set(Calendar.SECOND, 0);
 
                 Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.Controlers.Fragments.ContactFragment;
 import com.helb.eatBelgium.Controlers.Fragments.OrdersFragment;
 import com.helb.eatBelgium.Controlers.Fragments.PanierFragment;
@@ -26,6 +27,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //FOR DESIGN
         private Toolbar toolbar;
         private DrawerLayout drawerLayout;
+
 
         //For fragments
         private Fragment fragmentPlats;
@@ -46,6 +48,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_activity); // activity_home_drawer_layout
+
+
 
             // 6 - Configure all views
 

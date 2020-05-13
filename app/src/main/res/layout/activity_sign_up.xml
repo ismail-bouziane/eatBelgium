@@ -51,7 +51,7 @@
 
     <Button
         android:id="@+id/btSignUp"
-        android:text="Sign Up"
+        android:text="S'inscrire !"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:layout_alignParentBottom="true"
