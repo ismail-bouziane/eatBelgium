@@ -44,7 +44,7 @@
 
     <Button
         android:id="@+id/btSignIn"
-        android:text="Sign In"
+        android:text="Connexion"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:layout_alignParentBottom="true"

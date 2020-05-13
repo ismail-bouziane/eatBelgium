@@ -12,21 +12,15 @@
             android:id="@+id/activity_home_drawer_panier"
             android:icon="@drawable/ic_basket_panier"
             android:title="@string/panier" />
+        <item
+            android:id="@+id/activity_home_drawer_orders"
+            android:icon="@drawable/ic_order_commandes"
+            android:title="@string/commandes" />
+        <item
+            android:id="@+id/activity_home_drawer_contact"
+            android:icon="@drawable/ic_contact_mail"
+            android:title="@string/contact" />
     </group>
 
-    <item android:title="@string/configuration">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/activity_home_drawer_orders"
-                    android:icon="@drawable/ic_order_commandes"
-                    android:title="@string/commandes" />
-                <item
-                    android:id="@+id/activity_home_drawer_contact"
-                    android:icon="@drawable/ic_contact_mail"
-                    android:title="@string/contact" />
-            </group>
-        </menu>
-    </item>
 
 </menu> 
