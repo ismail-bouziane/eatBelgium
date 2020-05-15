@@ -118,7 +118,7 @@ public class PlatsFragment extends Fragment {
                 viewHolder.txtTitle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(view.getContext(), "TEST CLICK", Toast.LENGTH_SHORT).show(); // ici
+                      //  Toast.makeText(view.getContext(), "TEST CLICK", Toast.LENGTH_SHORT).show(); // ici
                         //    System.out.println(category);
 
 

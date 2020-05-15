@@ -39,8 +39,8 @@ public class SchedulerService  extends Service {
 
         //THIS IS WHERE YOU SET NOTIFICATION TIME FOR CASES WHEN THE NOTIFICATION NEEDS TO BE RESCHEDULED
         Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,5);
-        calendar.set(Calendar.MINUTE,22);
+        calendar.set(Calendar.HOUR_OF_DAY,23);
+        calendar.set(Calendar.MINUTE,40);
 
         myIntent = new Intent(this,AlarmNotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);

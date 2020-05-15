@@ -12,5 +12,6 @@ public class Common {
     public static User currentUser;
     public static Product productInList;
    public static ArrayList<String> listCommandes = new ArrayList<>();
+   public static int PrixTotal=0;
 }
 

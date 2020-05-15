@@ -38,6 +38,7 @@ import java.util.List;
 public class PanierFragment extends Fragment  {
 
     private ListView listView;
+    private TextView totalPrice;
     private ArrayAdapter<String> adapter;
     DatabaseReference databaseReference;
     Button btnCommander;
@@ -59,6 +60,8 @@ public class PanierFragment extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
 
         listView=(ListView)view.findViewById(R.id.list_panier);
+        totalPrice=(TextView)view.findViewById(R.id.PrixTOTAL);
+        totalPrice.setText("TOTAL : "+Common.PrixTotal+" €");
         adapter= new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1,Common.listCommandes); //simple_list_item_1 R.
 
 
@@ -70,16 +73,17 @@ public class PanierFragment extends Fragment  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(),"Vous avez cliqué a l'item : "+ adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"Vous avez cliqué sur  "+ adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 final int wich_item = position;
                 new AlertDialog.Builder(view.getContext())
                         .setIcon(android.R.drawable.ic_delete)
-                        .setTitle("Etes vous sure ?")
+                        .setTitle("Etes vous sûre ?")
                         .setMessage("Voulez vous vraiment retirer ce produit de votre panier")
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Common.listCommandes.remove(wich_item);
+
                                 //  positionchecker.clear();
                                 adapter.notifyDataSetChanged();
                             }
@@ -100,7 +104,7 @@ public class PanierFragment extends Fragment  {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
                 Date date = new Date();
                         Panier panier = new Panier(Common.listCommandes,Common.currentUser.getName(),format.format(date));
-
+                Toast.makeText(view.getContext(),"Votre commande a été effectuée avec succès ! ", Toast.LENGTH_SHORT).show();
                         table_panier.push().setValue(panier);
                         Common.listCommandes.clear();
                     }

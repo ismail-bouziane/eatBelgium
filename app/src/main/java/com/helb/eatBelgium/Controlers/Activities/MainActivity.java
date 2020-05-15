@@ -74,30 +74,23 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
     }
 
-    private Notification getNotification(String content) {
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Scheduled Notification");
-        builder.setContentText(content);
-        builder.setSmallIcon(R.drawable.ic_contact_mail);
-        return builder.build();
-    }
-
     private void startAlarm(boolean isNotification, boolean isRepeat) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;
 
         // SET TIME HERE
-        //Calendar calendar= Calendar.getInstance();
-        //calendar.set(Calendar.HOUR_OF_DAY,5);
-        //calendar.set(Calendar.MINUTE,33);
+        Calendar calendar= Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set(Calendar.MINUTE,02);
 
-        Calendar now = Calendar.getInstance();
+        /*Calendar now = Calendar.getInstance();
 
-        Calendar tmp = (Calendar) now.clone();
-        tmp.add(Calendar.MINUTE, 1);
-        Calendar nowPlus1Minute = tmp;
-
+        //Calendar tmp = (Calendar) now.clone();
+        now.add(Calendar.HOUR_OF_DAY,22);
+        now.add(Calendar.MINUTE, 2);
+        Calendar nowPlus1Minute = now;
+*/
 
         myIntent = new Intent(MainActivity.this, AlarmNotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
@@ -106,6 +99,6 @@ public class MainActivity extends AppCompatActivity {
         if(!isRepeat)
             manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
         else
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, nowPlus1Minute.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 }

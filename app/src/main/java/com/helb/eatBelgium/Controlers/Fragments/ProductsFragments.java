@@ -143,6 +143,7 @@ public class ProductsFragments extends Fragment {
                     public void onClick(View view) {
 
                         Toast.makeText(view.getContext(), "Ajoutée au panier", Toast.LENGTH_SHORT).show();
+                        Common.PrixTotal = Common.PrixTotal+product.getPrice();
                         Common.listCommandes.add(nomPlat);
                     }
                 });

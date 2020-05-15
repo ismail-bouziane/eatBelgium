@@ -1,6 +1,7 @@
 package com.helb.eatBelgium.Controlers.Activities;
 
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -44,13 +45,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         TextView txtFullName;
+
+
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.home_activity); // activity_home_drawer_layout
 
 
-
+            this.showFirstFragment();
             // 6 - Configure all views
 
             this.configureToolBar();
@@ -151,6 +154,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     break;
             }
         }
+    private void showFirstFragment(){
+
+        Fragment visibleFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_plat_layout);
+        if (visibleFragment == null){
+            // 1.1 - Show News Fragment
+            this.showFragment(FRAGMENTS_PLATS);
+            // 1.2 - Mark as selected the menu item corresponding to NewsFragment
+          //  this.navigationView.getMenu().getItem(0).setChecked(true);
+        }
+    }
    // Create each fragment page and show it
     private void showPlatsFragment(){
         if (this.fragmentPlats == null) this.fragmentPlats = PlatsFragment.newInstance();
@@ -178,5 +191,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.activity_home_frame_layout, fragment).commit();
         }
     }
+   
 }
 

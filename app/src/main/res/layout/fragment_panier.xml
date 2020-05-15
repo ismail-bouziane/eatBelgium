@@ -21,4 +21,15 @@
        android:layout_margin="8dp"
        android:text="Commander" />
 
+   <TextView
+       android:id="@+id/PrixTOTAL"
+       android:textSize="20sp"
+       android:layout_marginRight="16dp"
+       android:layout_marginLeft="16dp"
+       android:layout_margin="80dp"
+       android:layout_alignParentBottom="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="TextView" />
+
 </RelativeLayout>
