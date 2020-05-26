@@ -24,20 +24,20 @@ public class SchedulerService  extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startAlarm(true,true);
+       // startAlarm(true,true);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_NOT_STICKY;
     }
-
+/*
     private void startAlarm(boolean isNotification, boolean isRepeat) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;
 
-        //THIS IS WHERE YOU SET NOTIFICATION TIME FOR CASES WHEN THE NOTIFICATION NEEDS TO BE RESCHEDULED
+
         Calendar calendar= Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,23);
         calendar.set(Calendar.MINUTE,40);
@@ -50,5 +50,5 @@ public class SchedulerService  extends Service {
             manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
         else
             manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
-    }
+    }*/
 }

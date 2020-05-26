@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         btnSignUp = (Button)findViewById(R.id.btSignUp);
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void scheduleNotification(Notification notification, int delay) {
+    /*private void scheduleNotification(Notification notification, int delay) {
 
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
@@ -72,25 +73,19 @@ public class MainActivity extends AppCompatActivity {
         long futureInMillis = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
+    }*/
 
     private void startAlarm(boolean isNotification, boolean isRepeat) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;
 
-        // SET TIME HERE
+     // ici tu met l heure
         Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,13);
-        calendar.set(Calendar.MINUTE,02);
+        calendar.set(Calendar.HOUR_OF_DAY,12);
+        calendar.set(Calendar.MINUTE,27);
 
-        /*Calendar now = Calendar.getInstance();
 
-        //Calendar tmp = (Calendar) now.clone();
-        now.add(Calendar.HOUR_OF_DAY,22);
-        now.add(Calendar.MINUTE, 2);
-        Calendar nowPlus1Minute = now;
-*/
 
         myIntent = new Intent(MainActivity.this, AlarmNotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
