@@ -4,36 +4,27 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.R;
 import com.helb.eatBelgium.model.Panier;
 
-import java.security.Key;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class PanierFragment extends Fragment  {
 
@@ -43,6 +34,7 @@ public class PanierFragment extends Fragment  {
     DatabaseReference databaseReference;
     Button btnCommander;
     private static long maxId=0;
+
 
 
 
@@ -61,7 +53,15 @@ public class PanierFragment extends Fragment  {
 
         listView=(ListView)view.findViewById(R.id.list_panier);
         totalPrice=(TextView)view.findViewById(R.id.PrixTOTAL);
-        totalPrice.setText("TOTAL : "+Common.PrixTotal+" €");
+
+        Common common = new Common();
+        common.prixTotal=0;
+        common.calcule();
+
+
+
+        totalPrice.setText("TOTAL : "+ Common.prixTotal +" €");
+
         adapter= new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1,Common.listCommandes); //simple_list_item_1 R.
 
 
@@ -83,6 +83,10 @@ public class PanierFragment extends Fragment  {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Common.listCommandes.remove(wich_item);
+                                Common.listPrix.remove(wich_item);
+                                Common.prixTotal=0;
+                                common.calcule();
+                                totalPrice.setText("TOTAL : "+ Common.prixTotal +" €");
 
                                 //  positionchecker.clear();
                                 adapter.notifyDataSetChanged();
@@ -107,12 +111,16 @@ public class PanierFragment extends Fragment  {
                 Toast.makeText(view.getContext(),"Votre commande a été effectuée avec succès ! ", Toast.LENGTH_SHORT).show();
                         table_panier.push().setValue(panier);
                         Common.listCommandes.clear();
+                        Common.listPrix.clear();
+                Common.prixTotal=0;
+                common.calcule();
+                totalPrice.setText("TOTAL : "+ Common.prixTotal +" €");
+                adapter= new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1,Common.listCommandes);
+                listView.setAdapter(adapter);
                     }
         });
 
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

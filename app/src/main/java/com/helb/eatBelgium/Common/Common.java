@@ -11,7 +11,19 @@ import java.util.List;
 public class Common {
     public static User currentUser;
     public static Product productInList;
-   public static ArrayList<String> listCommandes = new ArrayList<>();
-   public static int PrixTotal=0;
+    public static ArrayList<String> listCommandes = new ArrayList<>();
+    public static ArrayList<Integer> listPrix = new ArrayList<>();
+    public static int prixTotal=0;
+
+
+    public void calcule() {
+
+        for (Integer i : listPrix) {
+            prixTotal += i;
+        }
+
+    }
+
+
 }
 

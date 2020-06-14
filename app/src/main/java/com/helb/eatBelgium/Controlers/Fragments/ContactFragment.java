@@ -37,6 +37,10 @@ public class ContactFragment extends Fragment {
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        sendMassage(view);
+
+    }
+    public void sendMassage(View view){
         contactMessage = view.findViewById(R.id.edtMessage);
         btnSendMessage = view.findViewById(R.id.btnSendMessage);
 
@@ -61,7 +65,6 @@ public class ContactFragment extends Fragment {
                 });
             }
         });
-
     }
 
     @Override

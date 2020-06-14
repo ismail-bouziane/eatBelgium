@@ -7,20 +7,33 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <TextView
         android:id="@+id/list_Products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:padding="8dp">
+        android:padding="8dp" />
 
-    </TextView>
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="270dp">
 
+    </ImageView>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler_products"
        android:scrollbars="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+        android:layout_width="403dp"
+        android:layout_height="match_parent">
 
    </androidx.recyclerview.widget.RecyclerView>
 

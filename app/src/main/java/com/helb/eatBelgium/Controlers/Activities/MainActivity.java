@@ -32,12 +32,9 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp = (Button)findViewById(R.id.btSignUp);
         btnSignIn = (Button)findViewById(R.id.btSignIn);
 
-        //scheduleNotification(getNotification("30 second delay"), 10000);
+
 
         startAlarm(true,true);
-        //txtSlogan = (TextView)findViewById(R.id.txtSlogan);
-       // Typeface face = Typeface.createFromAsset(getAssets(),"styleTexte.TTF");
-       // txtSlogan.setTypeface(face);
 
        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,33 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*private void scheduleNotification(Notification notification, int delay) {
-
-        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }*/
 
     private void startAlarm(boolean isNotification, boolean isRepeat) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;
 
-     // ici tu met l heure
+
         Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,12);
-        calendar.set(Calendar.MINUTE,27);
-
-
+        calendar.set(Calendar.HOUR_OF_DAY,14);
+        calendar.set(Calendar.MINUTE,8);
 
         myIntent = new Intent(MainActivity.this, AlarmNotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
-
 
         if(!isRepeat)
             manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);

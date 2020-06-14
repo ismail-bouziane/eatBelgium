@@ -1,4 +1,4 @@
-package com.helb.eatBelgium.Views;
+package com.helb.eatBelgium.Controlers.Activities.Views;
 
 import android.content.Context;
 import android.view.LayoutInflater;

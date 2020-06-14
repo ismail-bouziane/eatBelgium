@@ -52,10 +52,10 @@ public class OrdersFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        fetch();
+        fetchCommandes();
     }
 
-    private void fetch() {
+    private void fetchCommandes() {
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("Commandes").orderByChild("currentUser").equalTo(Common.currentUser.getName());

@@ -7,11 +7,11 @@
     android:padding="8dp"
     tools:context=".Controlers.Fragments.PlatsFragment">
 
-    <!-- en fait le viw holder doit charger le layout qui affiche un plat
-    mais tu as pas créer les layout en fait
-    -->
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/list_title"
             android:layout_width="match_parent"
@@ -19,15 +19,20 @@
             android:textSize="40dp"
             android:padding="8dp" />
 
+    <ImageView
+        android:id="@+id/imageCat"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+
+        android:layout_height="270dp">
+
+    </ImageView>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_categories"
         android:layout_width="403dp"
-        android:layout_height="341dp" />
-
-
-
-
-    <!-- tu essais d'assigner un RC à un LinearLayout-->
+        android:layout_height="match_parent" />
 
 
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,8 +25,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.helb.eatBelgium.R;
-import com.helb.eatBelgium.Views.CategoriesAdapter;
+//import com.helb.eatBelgium.Views.CategoriesAdapter;
 import com.helb.eatBelgium.model.Category;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +36,7 @@ import java.util.Objects;
 public class PlatsFragment extends Fragment {
 
     private List<Category> listCategory;
-    private CategoriesAdapter categoriesAdapter;
+  //  private CategoriesAdapter categoriesAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
@@ -102,7 +104,8 @@ public class PlatsFragment extends Fragment {
                                 System.out.println(snapshot.getChildren());
                                 itemID = snapshot.getKey().toString();
                                 return new Category(snapshot.getKey(),
-                                        snapshot.child("nomCat").getValue().toString());
+                                        snapshot.child("nomCat").getValue().toString(),
+                                        snapshot.child("image").getValue().toString());
                             }
                         })
                         .build();
@@ -137,12 +140,30 @@ public class PlatsFragment extends Fragment {
                        // itemID = "";
                     }
                 });
+                viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        txtProduct = view.findViewById(R.id.list_Products);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("recID",itemID);
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        ProductsFragments productsFragments = new ProductsFragments();
+                        productsFragments.setArguments(bundle);
+
+                        fragmentTransaction.replace(R.id.fragment_plat_layout,productsFragments);
+                        fragmentTransaction.commit();
+                    }
+                });
                 return new ViewHolder(view);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i, @NonNull Category category) {
                 viewHolder.setTxtTitle(category.getNomCategory());
+                viewHolder.setImage(category.getImage());
                 Log.d("DEBUG---------------------------------",category.getNomCategory());
                 viewHolder.root.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -174,17 +195,22 @@ public class PlatsFragment extends Fragment {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public RecyclerView root;
         public TextView txtTitle;
+        public ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             root = (RecyclerView)itemView.findViewById(R.id.list_categories);
             txtTitle= (TextView)itemView.findViewById(R.id.list_title);
+            imageView= (ImageView)itemView.findViewById(R.id.imageCat);
         }
         //    public TextView txtTitle;
         //  public TextView txtDesc;
          public void setTxtTitle(String string) {
               txtTitle.setText(string);
             }
+         public void setImage(String image){
+             Picasso.get().load(image).into(imageView);
+         }
     }
 
 

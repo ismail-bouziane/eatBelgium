@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.helb.eatBelgium.Common.Common;
 import com.helb.eatBelgium.R;
 import com.helb.eatBelgium.model.Category;
 import com.helb.eatBelgium.model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,8 @@ public class ProductsFragments extends Fragment {
     public TextView txtProduct;
     private static String recCatIDId;
     private static String nomPlat;
+    private static int prixPlat;
+
 
 
     public ProductsFragments() {
@@ -70,10 +74,8 @@ public class ProductsFragments extends Fragment {
 
         Bundle bundle = getArguments();
 
-         recCatIDId = bundle.getString("recID");
+        recCatIDId = bundle.getString("recID");
 
-       // txtProduct =(TextView) rootView.findViewById((R.id.list_Products));
-       // txtProduct.setText(recCatIDId);
         return  rootView;
     }
 
@@ -88,9 +90,10 @@ public class ProductsFragments extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        fetch();
+        getAllPlats();
     }
-    private void fetch(){
+
+    private void getAllPlats(){
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("products").orderByChild("idCat").equalTo(recCatIDId);
@@ -104,11 +107,11 @@ public class ProductsFragments extends Fragment {
                                 String catiD;
                                 catiD = snapshot.child("idCat").getValue().toString();
                                 nomPlat = snapshot.child("nomProduit").getValue().toString();
-
+                                prixPlat = Integer.parseInt(snapshot.child("price").getValue().toString());
                                     return new Product(snapshot.getKey(),
                                             snapshot.child("nomProduit").getValue().toString(),
                                             snapshot.child("idCat").getValue().toString(),
-                                            Integer.parseInt(snapshot.child("price").getValue().toString()) );
+                                            Integer.parseInt(snapshot.child("price").getValue().toString()),snapshot.child("image").getValue().toString() );
 
 
                             }
@@ -136,6 +139,7 @@ public class ProductsFragments extends Fragment {
 
             protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Product product) {
                 viewHolder.setTxtnomPlat(product.getNameProduct(),product.getPrice());
+                viewHolder.setImage(product.getImage());
 
                 // Log.d("DEBUG---------------------------------",category.getNomCategory());
                 viewHolder.txtnomPlat.setOnClickListener(new View.OnClickListener() {
@@ -143,8 +147,18 @@ public class ProductsFragments extends Fragment {
                     public void onClick(View view) {
 
                         Toast.makeText(view.getContext(), "Ajoutée au panier", Toast.LENGTH_SHORT).show();
-                        Common.PrixTotal = Common.PrixTotal+product.getPrice();
+                      ///  Common.PrixTotal = Common.PrixTotal+product.getPrice();
                         Common.listCommandes.add(nomPlat);
+                        Common.listPrix.add(prixPlat);
+                    }
+                });
+                viewHolder.imagePlat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "Ajoutée au panier", Toast.LENGTH_SHORT).show();
+                        ///  Common.PrixTotal = Common.PrixTotal+product.getPrice();
+                        Common.listCommandes.add(nomPlat);
+                        Common.listPrix.add(prixPlat);
                     }
                 });
             }
@@ -170,14 +184,19 @@ public class ProductsFragments extends Fragment {
         public RecyclerView rootPlats;
         public TextView txtnomPlat;
         public TextView pricePlat;
+        public ImageView imagePlat;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rootPlats=(RecyclerView)itemView.findViewById(R.id.recycler_products);
             txtnomPlat=(TextView)itemView.findViewById(R.id.list_Products);
+            imagePlat=(ImageView)itemView.findViewById((R.id.imageProduct));
         }
         public void setTxtnomPlat(String string, int price) {
             txtnomPlat.setText(string +" "+price+"€");
+        }
+        public void setImage(String image){
+            Picasso.get().load(image).into(imagePlat);
         }
     }
 
